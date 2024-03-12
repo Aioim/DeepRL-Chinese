@@ -61,6 +61,7 @@ class ReplayBuffer:
     done: list = field(default_factory=list)
 
     def push(self, state, action, reward, done, next_state):
+        #此处可以使用deque简化代码
         if self.size < self.maxsize:
             self.state.append(state)
             self.action.append(action)
