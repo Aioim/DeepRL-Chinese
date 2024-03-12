@@ -166,6 +166,7 @@ def train(args, env, agent):
             log_losses.append(loss.item())
 
             # 更新目标网络。
+            # agent.target_model.load_state_dict(agent.model.state_dict())
             for target_param, param in zip(agent.target_model.parameters(), agent.model.parameters()):
                 target_param.data.copy_(args.lr_target * param.data + (1 - args.lr_target) * target_param.data)
 
