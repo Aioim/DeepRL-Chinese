@@ -42,6 +42,7 @@ class DoubleDQN:
 
     def compute_loss(self, s_batch, a_batch, r_batch, d_batch, next_s_batch):
         # Compute current Q value based on current states and actions.
+        # unsqueeze(1)在第一维进行增维，squeeze()将所有的1维数据去掉维数，squeeze(1)将第一维进行降维
         qvals = self.model(s_batch).gather(1, a_batch.unsqueeze(1)).squeeze()
         # next state的value不参与导数计算，避免不收敛。
         next_qvals, _ = self.target_model(next_s_batch).detach().max(dim=1)
